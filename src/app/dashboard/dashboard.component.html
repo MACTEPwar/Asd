@@ -1,0 +1,5 @@
+<div class="p-grid" pDroppable="plitka" (onDrop)="onDrop($event)">
+    <div class="p-col" *ngFor="let item of items;">
+        <app-plitka [item]="item" [attr.data-id]="item.id" pDraggable="plitka" (onDragStart)="onDragStart($event,item)"></app-plitka>
+    </div>
+</div>

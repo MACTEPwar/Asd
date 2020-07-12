@@ -1,0 +1,29 @@
+<p-card>
+    <p-header>
+        {{item.name}}
+    </p-header>
+    <div class="p-grid">
+        <div class="p-col">
+            <div *ngFor="let i of createRange(getRowCount()); let rowIndex = index" class="p-col">
+                <div class="p-grid">
+                    <div class="p-col" *ngFor="let j of createRange(itemsPreRow);" (click)="onFirstParentClick(i,j,rowIndex)">
+                        <div *ngIf="ind(i,j) < item.children.length">
+                            {{item.children[ind(i,j)].name}}
+                        </div>
+                    </div>
+                </div>
+                <!-- Контейнер для детей  -->
+                <div class="p-grid" [ngClass]="{hide: rowIndex !== rowIndexDisplayedChildren || !childs || childs.length === 0}">
+                    <div class="p-col">                    
+                        <p-tree [value]="childs" selectionMode="single" (onNodeSelect)="onNodeSelect($event)">
+                            <ng-template let-node  pTemplate="picture" >
+                                <span class="pi pi-reply"></span>
+                                <span >{{node.label}}</span>
+                              </ng-template>
+                        </p-tree>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-card>
